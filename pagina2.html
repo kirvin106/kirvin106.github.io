@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Investigación: Protocolo HTTP</title>
+  
+</head>
+<body>
+  <header>
+    <h1>Protocolo HTTP — Investigación</h1>
+    <h2>ESCAMILLA CASTILLO IRVIN ALFREDO</h2>
+    <p>Resumen breve del protocolo HTTP: estructura, funcionamiento, métodos de petición y códigos de respuesta.</p>
+  </header>
+
+  <section id="introduccion">
+    <h2>Introducción</h2>
+    <p>
+      HTTP (Hypertext Transfer Protocol) es un protocolo de la capa de aplicación usado para la transferencia de recursos (HTML, imágenes, JSON, etc.)
+      entre clientes (por ejemplo, navegadores) y servidores. Es un protocolo cliente-servidor y, en su diseño clásico, <strong>sin estado</strong>.
+    </p>
+  </section>
+
+  <section id="estructura-funcionamiento">
+    <h2>Estructura y funcionamiento</h2>
+    <p>
+      HTTP intercambia <em>mensajes</em> entre cliente y servidor. Existen dos tipos de mensajes:
+      <strong>peticiones (requests)</strong> y <strong>respuestas (responses)</strong>.
+    </p>
+
+    <h3>Estructura básica de una petición HTTP</h3>
+    <pre>
+Request-Line
+Header1: valor
+Header2: valor
+
+[cuerpo opcional]
+    </pre>
+    <p>
+      Ejemplo de request-line: <code>GET /index.html HTTP/1.1</code>. Los encabezados (headers) transmiten metadatos
+      como <code>Host</code>, <code>User-Agent</code>, <code>Content-Type</code> o <code>Content-Length</code>.
+    </p>
+
+    <h3>Estructura básica de una respuesta HTTP</h3>
+    <pre>
+HTTP/1.1 200 OK
+Header1: valor
+Header2: valor
+
+[cuerpo opcional con el recurso solicitado]
+    </pre>
+    <p>
+      La respuesta incluye la <em>línea de estado</em> (versión HTTP + código + frase) seguida de encabezados y el cuerpo.
+      HTTP/2 y HTTP/3 difieren en el transporte/subyacente, pero la semántica de métodos y códigos se mantiene.
+    </p>
+  </section>
+
+  <section id="metodos">
+    <h2>Métodos de petición (principales)</h2>
+    <p>Los métodos indican la intención del cliente. A continuación los más usados:</p>
+
+    <ul>
+      <li><strong>GET</strong> — Recuperar un recurso. <em>Seguro</em> (no debería modificar estado) y cacheable.</li>
+      <li><strong>HEAD</strong> — Igual que GET pero sin cuerpo (solo encabezados). Útil para comprobar metadatos.</li>
+      <li><strong>POST</strong> — Enviar datos al servidor (por ejemplo, formularios). No es idempotente por defecto.</li>
+      <li><strong>PUT</strong> — Reemplazar o crear un recurso en la URI dada. Es idempotente.</li>
+      <li><strong>PATCH</strong> — Aplicar modificaciones parciales a un recurso existente.</li>
+      <li><strong>DELETE</strong> — Eliminar un recurso. Normalmente idempotente.</li>
+      <li><strong>OPTIONS</strong> — Consultar qué métodos están permitidos en el servidor/URI (útil en CORS y pruebas).</li>
+    </ul>
+
+    <p>Conceptos relacionados: <em>seguro</em> (safe), <em>idempotente</em> y <em>cacheable</em> (si la respuesta puede guardarse).</p>
+  </section>
+
+  <section id="codigos-respuesta">
+    <h2>Códigos de respuesta HTTP</h2>
+    <p>Los códigos de estado indican el resultado de la petición. Se agrupan por clases:</p>
+
+    <ol>
+      <li><strong>1xx</strong> — Informacionales (100 Continue, 101 Switching Protocols).</li>
+      <li><strong>2xx</strong> — Éxito (200 OK, 201 Created, 204 No Content).</li>
+      <li><strong>3xx</strong> — Redirecciones (301 Moved Permanently, 302 Found, 304 Not Modified).</li>
+      <li><strong>4xx</strong> — Errores del cliente (400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found).</li>
+      <li><strong>5xx</strong> — Errores del servidor (500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable).</li>
+    </ol>
+
+    <h3>Ejemplos comunes y significado</h3>
+    <ul>
+      <li><strong>200 OK</strong>: La petición tuvo éxito; el recurso se devuelve en el cuerpo (si procede).</li>
+      <li><strong>201 Created</strong>: Recurso creado (por ejemplo, tras un POST o PUT).</li>
+      <li><strong>301 Moved Permanently</strong>: Redirección permanente a otra URL.</li>
+      <li><strong>302 Found</strong>: Redirección temporal.</li>
+      <li><strong>304 Not Modified</strong>: El recurso no ha cambiado; el cliente puede usar la versión en caché.</li>
+      <li><strong>400 Bad Request</strong>: Solicitud malformada.</li>
+      <li><strong>401 Unauthorized</strong>: Requiere autenticación.</li>
+      <li><strong>403 Forbidden</strong>: El cliente no tiene permiso para acceder al recurso.</li>
+      <li><strong>404 Not Found</strong>: Recurso no encontrado en el servidor.</li>
+      <li><strong>500 Internal Server Error</strong>: Error genérico del servidor al procesar la solicitud.</li>
+    </ul>
+  </section>
+
+  <section id="notas-adicionales">
+    <h2>Notas adicionales</h2>
+    <p>
+      - HTTP originalmente usa TCP como transporte (HTTP/1.1 y HTTP/2 sobre TCP); HTTP/3 usa QUIC (sobre UDP).<br>
+      - HTTP es extensible: encabezados personalizados y nuevas cabeceras permiten negociaciones (por ejemplo, <code>Accept</code>, <code>Content-Type</code>).
+    </p>
+  </section>
+
+  <footer>
+    <h3>Fuentes y lecturas recomendadas</h3>
+    <ul>
+      <li>MDN Web Docs — Guía y referencia sobre HTTP (estructura, métodos y códigos).</li>
+      <li>RFC 7231 — Definición de semántica HTTP/1.1 (request methods, status codes, headers).</li>
+      <li>Listados completos de códigos de estado (IANA / Wikipedia y MDN).</li>
+    </ul>
+  </footer>
+</body>
+</html>
