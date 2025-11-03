@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea de Tiempo - Tecnologías Disruptivas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #3498db;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            margin-bottom: 40px;
+            width: 45%;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #ecf0f1;
+            position: relative;
+        }
+        
+        .left {
+            float: left;
+            clear: both;
+        }
+        
+        .right {
+            float: right;
+            clear: both;
+        }
+        
+        .year {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+        
+        .tech-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .inventor {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            color: #34495e;
+        }
+        
+        .section-title {
+            text-align: center;
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 40px 0 20px;
+        }
+        
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Línea de Tiempo de Tecnologías Disruptivas</h1>
+        
+        <div class="timeline">
+            <h2 class="section-title">Tecnologías Históricas</h2>
+            
+            <div class="timeline-item left">
+                <div class="year">1040</div>
+                <div class="tech-name">Imprenta (China)</div>
+                <div class="inventor">Primera imprenta con piezas de porcelana</div>
+                <div class="description">Cambió la forma de reproducir textos y difundir conocimiento.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">1440</div>
+                <div class="tech-name">Imprenta (Gutenberg)</div>
+                <div class="inventor">Johannes Gutenberg</div>
+                <div class="description">Revolucionó la producción de libros, quitando el monopolio a la iglesia católica.</div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="year">1769</div>
+                <div class="tech-name">Máquina de vapor</div>
+                <div class="inventor">James Watt</div>
+                <div class="description">Impulsó la Revolución Industrial, cambiando todos los ámbitos de la humanidad.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">1854</div>
+                <div class="tech-name">Teléfono</div>
+                <div class="inventor">Antonio Meucci (Teletrofoni)</div>
+                <div class="description">Cambió la forma de comunicarse a grandes distancias.</div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="year">1876</div>
+                <div class="tech-name">Teléfono</div>
+                <div class="inventor">Alexander Graham Bell (patente)</div>
+                <div class="description">Popularizó la comunicación a distancia y creó una nueva industria.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">1908</div>
+                <div class="tech-name">Automóvil (producción en serie)</div>
+                <div class="inventor">Henry Ford (Modelo T)</div>
+                <div class="description">Cambió el transporte de personas y mercancías mediante fabricación en serie.</div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="year">1973</div>
+                <div class="tech-name">Teléfono móvil</div>
+                <div class="inventor">Martín Cooper (primera llamada)</div>
+                <div class="description">Inició la era de la comunicación móvil sin cables.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">1992</div>
+                <div class="tech-name">Smartphone</div>
+                <div class="inventor">IBM Simon Personal Communicator</div>
+                <div class="description">Primer dispositivo que combinaba teléfono y funciones de computadora.</div>
+            </div>
+            
+            <div class="clear"></div>
+            
+            <h2 class="section-title">Tecnologías Actuales con Potencial Disruptivo</h2>
+            
+            <div class="timeline-item left">
+                <div class="year">1960s-1990s</div>
+                <div class="tech-name">Internet</div>
+                <div class="inventor">ARPANET → World Wide Web</div>
+                <div class="description">Base de las tecnologías modernas, cambió el curso de la historia humana.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">1990s-2000s</div>
+                <div class="tech-name">Internet de las Cosas (IoT)</div>
+                <div class="inventor">Dispositivos conectados</div>
+                <div class="description">Wearables, automóviles conectados, focos inteligentes que recopilan y transfieren datos.</div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="year">2000s</div>
+                <div class="tech-name">Computación en la Nube</div>
+                <div class="inventor">AWS, Google Cloud, Azure</div>
+                <div class="description">Acceso a recursos informáticos remotos para almacenamiento y ejecución de aplicaciones.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">1950s-2010s</div>
+                <div class="tech-name">Inteligencia Artificial</div>
+                <div class="inventor">Origen en 1950s, auge en 2010s</div>
+                <div class="description">Capacidad de computadoras para emular la inteligencia humana en tareas.</div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="year">1960s-2010s</div>
+                <div class="tech-name">Realidad Virtual y Aumentada</div>
+                <div class="inventor">Oculus, Microsoft HoloLens</div>
+                <div class="description">Experiencias simuladas que combinan elementos físicos reales con virtuales.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">1980s-presente</div>
+                <div class="tech-name">Computación Cuántica</div>
+                <div class="inventor">IBM, Google</div>
+                <div class="description">Computadoras que usan principios cuánticos para cálculos complejos a alta velocidad.</div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="year">2008</div>
+                <div class="tech-name">Blockchain</div>
+                <div class="inventor">Bitcoin</div>
+                <div class="description">Registro digital compartido e inmodificable para transacciones en redes.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">2000s</div>
+                <div class="tech-name">Robótica de Servicios</div>
+                <div class="inventor">Aplicaciones en logística, medicina, agricultura</div>
+                <div class="description">Robots que realizan tareas útiles para humanos en diversos ámbitos.</div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="year">2000s-2010s</div>
+                <div class="tech-name">Vehículos Autónomos</div>
+                <div class="inventor">Tesla, DARPA</div>
+                <div class="description">Vehículos que se conducen sin intervención humana directa.</div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="year">2000s</div>
+                <div class="tech-name">Tecnologías Verdes</div>
+                <div class="inventor">Energía solar, captura de carbono</div>
+                <div class="description">Innovaciones para reducir el impacto ambiental y promover sostenibilidad.</div>
+            </div>
+            
+            <div class="clear"></div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; font-style: italic; color: #7f8c8d;">
+            Actividad #11 - Fundamentos de Tecnologías de Internet
+            Irvin Alfredo Escamilla Castillo 
+            1C
+            Fundamentos de Tecnologías de Internet
+            profesor:josé domingo anguiano santana
+
+        </div>
+    </div>
+</body>
+</html>
