@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Apache Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+        .step {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #333;
+        }
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 5px;
+            background-color: white;
+        }
+        .code {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        .note {
+            background-color: #fffacd;
+            padding: 10px;
+            border-left: 4px solid #ffeb3b;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reporte de Instalación y Configuración de Apache Server</h1>
+        
+        <div class="introduccion">
+            <h2>Introducción</h2>
+            <p>Apache HTTP Server, comúnmente conocido como Apache, es un servidor web de código abierto desarrollado por la Apache Software Foundation. Es uno de los servidores web más populares y ampliamente utilizados en todo el mundo, sirviendo una gran parte de los sitios web activos en Internet.</p>
+            
+            <p>La importancia de Apache en la web actual es inmensa. Proporciona una plataforma confiable y segura para alojar sitios web y aplicaciones web. Su arquitectura modular permite extender sus funcionalidades mediante módulos adicionales, lo que lo hace muy versátil para diferentes necesidades. Además, al ser de código abierto, es gratuito y cuenta con una amplia comunidad de desarrolladores que contribuyen a su mejora continua.</p>
+            
+            <p>En este reporte, documentaremos los pasos seguidos para instalar y configurar Apache Server en un sistema operativo, incluyendo el proceso de cambiar el puerto predeterminado para adaptarlo a nuestras necesidades especificas.</p>
+        </div>
+        
+        <h2>Pasos de Instalación y Configuración</h2>
+        
+        <div class="step">
+            <h3>Paso 1: Verificar requisitos del sistema</h3>
+            <p>Antes de instalar Apache, verificamos que nuestro sistema cumpla con los requisitos minimos. Esto incluye tener suficientes recursos de hardware y un sistema operativo compatible.</p>
+            <img src="imagenes/paso1.png" alt="Verificación de requisitos del sistema" class="screenshot">
+        </div>
+        
+        <div class="step">
+            <h3>Paso 2: Descargar Apache Server</h3>
+            <p>Accedimos al sitio web oficial de Apache (https://httpd.apache.org/) y descargamos la versión más reciente del servidor compatible con nuestro sistema operativo.</p>
+            <img src="imagenes/paso2.png" alt="Página de descarga de Apache" class="screenshot">
+        </div>
+        
+        <div class="step">
+            <h3>Paso 3: Ejecutar el instalador</h3>
+            <p>descargamos en el sitio oficial de Apache, nos vamos al apartado de Windows y descargamos los binarios, le damos a "Apache Lounnge" y descargamos los binarios X64. Una vez descargados los extraemos y movemos la carpeta apache24 a nuestro disco local.</p>
+            <img src="imagenes/paso3.png" alt="Proceso de instalación de Apache" class="screenshot">
+        </div>
+        
+        <div class="step">
+            <h3>Paso 4: Configuración inicial</h3>
+            <p>ya dentro de la carpeta de Apache buscamos donde nos diga bin y accedemos a ello.</p>
+            <img src="imagenes/paso4.png" alt="Configuración inicial de Apache" class="screenshot">
+        </div>
+        
+        <div class="step">
+            <h3>Paso 5: buscamos httpd</h3>
+            <p>comprobamos que tenemos httpd</p>
+            <div class="code">
+                # Buscamos la línea que contiene "Listen 80"<br>
+                # y la cambiamos por el puerto deseado, por ejemplo:<br>
+                Listen 8080
+            </div>
+            <p>Localizamos el archivo httpd.conf en el directorio de instalación de Apache (generalmente en "conf/httpd.conf") y modificamos la línea correspondiente.</p>
+            <img src="imagenes/paso5.png" alt="Cambio de puerto en httpd.conf" class="screenshot">
+        </div>
+        
+        <div class="step">
+            <h3>Paso 6: comprobamos la descarga y abrimos</h3>
+            <p>una vez comprobamos, usamos el comando httpd-install, se abrira una ventana del firewall y le damos acceso. una vez instalado nos metemos a servicios y buscamos que este Apache24, iniciamos el servicio y comprobamos agregando localhost</p>
+            <img src="imagenes/paso6.png" alt="comprobar descarga" class="screenshot">
+            <img src="imagenes/paso7.png" alt="comprobar descarga" class="screenshot">
+             <img src="imagenes/paso8.png" alt="comprobar descarga" class="screenshot">
+        </div>
+        
+        <div class="step">
+            <h3>Paso 7: cambio de puerto</h3>
+            <p>hacemos el cambio de puerto desde la carpeta de Apache, buscamos la carpeta conf y buscamos httpd conf. cambiamos el lisen de 80 a 8080</p>
+            <img src="imagenes/paso9.png" alt="Página de verificación de Apache" class="screenshot">
+        </div>
+        
+        <div class="step">
+            <h3>Paso 8:revisamos</h3>
+            <p>Finalmente, comprobamos que se haya echo el cambio y que se ingrese del link normal añadiendo lo del 8080.</p>
+            <img src="imagenes/paso10.png" alt="Configuración de sitio web personalizado" class="screenshot">
+        </div>
+        
+        <div class="note">
+            <p><strong>Nota:</strong> Es importante recordar que al cambiar el puerto predeterminado, los usuarios deberán especificar el puerto en la URL para acceder al sitio (ej: http://misitio.com:8080). Además, debemos asegurarnos de que el firewall permita el trafico en el nuevo puerto seleccionado.</p>
+        </div>
+        
+        <h2>Conclusión</h2>
+        <p>La instalación y configuración de Apache Server es un proceso relativamente sencillo que nos permite tener un servidor web funcional en poco tiempo. El cambio de puerto es una configuración útil cuando necesitamos ejecutar múltiples servidores web en la misma máquina o cuando el puerto 80 está siendo utilizado por otra aplicación.</p>
+        
+        <p>Apache continúa siendo una opción popular para alojar sitios web debido a su estabilidad, flexibilidad y el fuerte soporte de la comunidad. Con esta instalación, ahora tenemos una base sólida para desarrollar y probar aplicaciones web.</p>
+    </div>
+</body>
+</html>

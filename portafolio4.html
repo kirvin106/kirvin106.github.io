@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="sp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+    <script>
+ function convertirMillasMetros(){
+    let valorMillas, resultadoMetros
+    valorMillas=parseFloat(document.getElementById("valorMillas").value);
+    resultadoMetros=valorMillas*1852;
+    parseFloat(document.getElementById("resultadoMetros").value=resultadoMetros);
+    }
+
+
+    function calcularDescuentoProducto(){
+        let precioInicial, porcentajeDescuento, precioConDescuento
+        precioInicial=parseFloat(document.getElementById("precioInicial").value);
+        porcentajeDescuento=parseFloat(document.getElementById("porcentajeDescuento").value);
+    precioConDescuento=precioInicial-(porcentajeDescuento/100*precioInicial);
+    parseFloat(document.getElementById("precioConDescuento").value=precioConDescuento);
+    }
+
+
+    function calcularPorcentajeDescuento (){
+        let precioSinDescuento, precioConRebaja, porcentajeCalculado
+        precioSinDescuento=parseFloat(document.getElementById("precioSinDescuento").value);
+        precioConRebaja=parseFloat(document.getElementById("precioConRebaja").value);
+        porcentajeCalculado=(precioSinDescuento-precioConRebaja)/precioSinDescuento*100
+        parseFloat(document.getElementById("porcentajeCalculado").value=porcentajeCalculado);    
+    }
+
+
+    function calcularOperacionesBasicas (){
+    let primerValor, segundoValor, sumaTotal, diferenciaValores, productoValores, cocienteValores 
+    primerValor=parseFloat(document.getElementById("primerValor").value);
+    segundoValor=parseFloat(document.getElementById("segundoValor").value);
+    sumaTotal=primerValor+segundoValor
+    parseFloat(document.getElementById("sumaTotal").value=sumaTotal);
+    diferenciaValores=primerValor-segundoValor
+    parseFloat(document.getElementById("diferenciaValores").value=diferenciaValores);
+    productoValores=primerValor*segundoValor
+    parseFloat(document.getElementById("productoValores").value=productoValores);
+    cocienteValores=primerValor/segundoValor
+    parseFloat(document.getElementById("cocienteValores").value=cocienteValores);
+    }
+
+
+    function calcularVolumenEsfera (){
+    let radioEsfera, volumenEsferico
+    radioEsfera=parseFloat(document.getElementById("radioEsfera").value);
+    volumenEsferico=(4/3)*3.1416*(radioEsfera**3)
+    parseFloat(document.getElementById("volumenEsferico").value=volumenEsferico);
+    }
+
+
+    function convertirPulgadasCentimetros () {
+    let medidaPulgadas, medidaCentimetros
+    medidaPulgadas=parseFloat(document.getElementById("medidaPulgadas").value);
+    medidaCentimetros=medidaPulgadas*2.54
+    parseFloat(document.getElementById("medidaCentimetros").value=medidaCentimetros);
+    }
+
+
+    function convertirSegundosTiempo () {
+    let totalSegundos, horasCalculadas, minutosCalculados, segundosRestantes, segundosFinales
+    totalSegundos=parseInt(document.getElementById("totalSegundos").value);
+    horasCalculadas=Math.floor(totalSegundos/3600);
+    segundosRestantes=totalSegundos%3600;
+    minutosCalculados=Math.floor(segundosRestantes/60);
+    segundosFinales=segundosRestantes%60;
+    parseInt(document.getElementById("horasCalculadas").value=horasCalculadas);
+    parseInt(document.getElementById("minutosCalculados").value=minutosCalculados);
+    parseInt(document.getElementById("segundosFinales").value=segundosFinales);
+    }
+
+    function  calcularVolumenCilindro (){
+    let alturaCilindro, radioCilindro, volumenCilindrico
+    alturaCilindro=parseFloat(document.getElementById("alturaCilindro").value);
+    radioCilindro=parseFloat(document.getElementById("radioCilindro").value);
+    volumenCilindrico=3.1416*(radioCilindro*radioCilindro)*alturaCilindro
+    document.getElementById("volumenCilindrico").value=volumenCilindrico;
+    }
+
+
+     function  calcularVolumenCono(){
+    let radioCono, alturaCono, volumenConico
+    radioCono=parseFloat(document.getElementById("radioCono").value);
+    alturaCono=parseFloat(document.getElementById("alturaCono").value);
+    volumenConico=(3.1416*(radioCono**2)*alturaCono)/3
+    document.getElementById("volumenConico").value=volumenConico;
+    }
+
+
+     function  calcularVolumenCubo(){
+    let ladoCubo, volumenCubico
+    ladoCubo=parseFloat(document.getElementById("ladoCubo").value);
+    volumenCubico=ladoCubo**3
+    document.getElementById("volumenCubico").value=volumenCubico;
+    }
+
+ </script>
+</head>
+<body style="background-color: rgb(201, 143, 255); text-align: center; 
+padding: 10px;
+margin: auto;">
+    <h1>1. Convertir millas a metros:</h1>
+<label for="valorMillas">Millas:</label>
+<input type="number" placeholder="tus millas" id="valorMillas"> <br>
+<button onclick="convertirMillasMetros()">convertir</button> <br>
+<label for="resultadoMetros">Resultado:</label> 
+<input type="tu resultado" placeholder="Tus millas nauticas" id="resultadoMetros" readonly>
+
+
+<h1> 2. calcular descuento de tu producto:</h1>
+ <label for="precioInicial">cual es tu precio:</label>
+ <input type="number" placeholder="tu precio" id="precioInicial"> <br>
+<label for="porcentajeDescuento">Cual es tu descuento:</label> 
+<input type="number" placeholder="descuento" id="porcentajeDescuento"> <br>
+<button onclick="calcularDescuentoProducto()">calcular descuento</button> <br>
+<label for="precioConDescuento">resultado:</label> 
+<input type="descuentazo" placeholder="aqui tu Resultado" id="precioConDescuento" readonly>
+
+
+<h1> 3. mostrar el precio correspondiente</h1>
+<label for="precioSinDescuento">Cual es tu primer precio?</label>
+<input type="number" placeholder="aqui tu numero" id="precioSinDescuento"> <br>
+<label for="precioConRebaja">Cual es tu precio ya con el descuento?</label>
+<input type="number" placeholder="tu precio con descuento aqui" id="precioConRebaja"> <br>
+<button onclick="calcularPorcentajeDescuento()">Calcula tu porcentaje de descuento</button> <br>
+<label for="porcentajeCalculado">el porcentaje de tu descuento es:</label> 
+<input type="descuentazo" id="porcentajeCalculado" placeholder="tu porcentaje" readonly>
+
+
+<h1>4. Mostrar suma, resta, multiplicacion y division</h1>
+<label for="primerValor">Cual sera tu primer numero?</label>
+<input type="number" placeholder="first number" id="primerValor"> <br>
+<label for="segundoValor">Cual sera tu segundo numero?</label>
+<input type="number" placeholder="second number" id="segundoValor"> <br>
+<button onclick="calcularOperacionesBasicas()">Calcular</button> <br>
+<label for="sumaTotal">Tu suma es:</label>
+<input type="number" placeholder="tu suma" id="sumaTotal" readonly> <br>
+<label for="diferenciaValores">Tu resta es:</label>
+<input type="number" placeholder="tu resta" id="diferenciaValores" readonly> <br>
+<label for="productoValores">Tu multiplicacion es:</label>
+<input type="number" placeholder="tu multiplicacion" id="productoValores" readonly> <br>
+<label for="cocienteValores">Tu division es:</label>
+<input type="number" placeholder="tu division" id="cocienteValores" readonly> <br>
+
+
+<h1>5. Volumen de una esfera</h1>
+<label for="radioEsfera">Cual es tu radio de la esfera?</label>
+<input type="number" placeholder="aqui tu radio" id="radioEsfera"> <br>
+<button onclick="calcularVolumenEsfera ()">Calcular volumen</button> <br> 
+<label for="volumenEsferico">El volumen de tu esfera:</label>
+<input type="number" placeholder="tu volumen" id="volumenEsferico" readonly> <br>
+
+
+<h1>6. Convertir pulgadas a centimetros</h1>
+<label for="medidaPulgadas">tus pulgadas:</label>
+<input type="number" placeholder="aqui tus pulgadas" id="medidaPulgadas"> <br>
+<button onclick="convertirPulgadasCentimetros ()">Convertir a centimetros</button> <br>
+<label for="medidaCentimetros">En centimetros es:</label>
+<input type="number" placeholder="tus centimetros" id="medidaCentimetros" readonly>
+
+
+<h1>7. Cantidad de segundos a horas, minutos, segundos</h1>
+<label for="totalSegundos">Escribe tu cantidad de segundos:</label>
+<input type="number" placeholder="tus numeros:" id="totalSegundos"> <br>
+<button onclick="convertirSegundosTiempo ()">Convertir</button> <br>
+<label for="horasCalculadas">Horas:</label>
+<input type="number" placeholder="Tus horas" id="horasCalculadas" readonly> <br>
+<label for="minutosCalculados">Minutos:</label>
+<input type="number" placeholder="tus minutos" id="minutosCalculados" readonly> <br>
+<label for="segundosFinales">Segundos:</label>
+<input type="number" placeholder="tus segundos" id="segundosFinales" readonly>
+
+
+<h1>8. Volumen de un cilindro</h1>
+<label for="alturaCilindro">Cual es la altura de tu cilindro?</label>
+<input type="number" placeholder="la altura" id="alturaCilindro"> <br>
+<label for="radioCilindro">Cual es la radio de tu cilindro?</label>
+<input type="number" placeholder="tu radio" id="radioCilindro"> <br>
+<button onclick="calcularVolumenCilindro ()">Sacar volumen</button> <br>
+<label for="volumenCilindrico">Este es el volumen:</label>
+<input type="number" placeholder="el volumen" id="volumenCilindrico" readonly>
+
+
+<h1>9. Volumen de un cono</h1>
+<label for="radioCono">Cual es la radio de tu cono?</label>
+<input type="number" placeholder="tu radio" id="radioCono"> <br>
+<label for="alturaCono">Cual es la altura de tu cono?</label>
+<input type="number" placeholder="tu altura" id="alturaCono"> <br>
+<button onclick="calcularVolumenCono ()">Sacar volumen</button> <br>
+<label for="volumenConico">El volumen:</label>
+<input type="number" placeholder="tu volumen" id="volumenConico" readonly>
+
+
+<h1>10. volumen de un cubo</h1>
+<label for="ladoCubo">Cual es la longitud del lado del cubo?</label>
+<input type="number" placeholder="tu longitud" id="ladoCubo"> <br>
+<button onclick="calcularVolumenCubo ()">Sacar volumen</button> <br>
+<label for="volumenCubico">El volumen:</label>
+<input type="number" placeholder="tu Volumen" id="volumenCubico" readonly>
+</body>
+</html>
+
+</body>
+</html>
