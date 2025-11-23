@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta para Yanet - Ojitos de Luna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffd1dc, #ffb6c1, #ffc0cb);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .carta {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e, #ff6b6b);
+        }
+        
+        .titulo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .titulo h1 {
+            font-size: 32px;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .titulo h2 {
+            font-size: 20px;
+            color: #888;
+            font-weight: normal;
+            font-style: italic;
+        }
+        
+        .corazon {
+            text-align: center;
+            font-size: 40px;
+            margin: 20px 0;
+            color: #ff6b6b;
+        }
+        
+        .mensaje p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: justify;
+            color: #444;
+        }
+        
+        .destacado {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .firma {
+            text-align: right;
+            margin-top: 40px;
+            font-style: italic;
+            font-size: 20px;
+            color: #ff6b6b;
+        }
+        
+        .fecha {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #ff6b6b;
+            border-top: 1px dashed #ffb6c1;
+            padding-top: 15px;
+        }
+        
+        .decoracion {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .decoracion-1 {
+            top: 20px;
+            right: 20px;
+            font-size: 80px;
+            transform: rotate(15deg);
+        }
+        
+        .decoracion-2 {
+            bottom: 20px;
+            left: 20px;
+            font-size: 60px;
+            transform: rotate(-10deg);
+        }
+        
+        @media (max-width: 600px) {
+            .carta {
+                padding: 25px;
+            }
+            
+            .titulo h1 {
+                font-size: 26px;
+            }
+            
+            .mensaje p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carta">
+        <div class="decoracion decoracion-1">❤️</div>
+        <div class="decoracion decoracion-2">❤️</div>
+        
+        <div class="titulo">
+            <h1>Para mi Yanet, "Ojitos de Luna"</h1>
+            <h2>Una carta para recordar nuestros 4 meses juntos</h2>
+        </div>
+        
+        <div class="corazon">❤️</div>
+        
+        <div class="mensaje">
+            <p>Mi amor,</p>
+            
+            <p>Cuando estoy enamorado siento ardor en el pecho no sé si te ha pasado, se enciende como si siempre hubiera estado apagado y nunca me hubiera dado cuenta que para eso sirve se, siempre estuvo para sentir, para sentirte, para sentir todo hasta lo intangible es como si tu sonrisa me llegara directo al cuerpo y me llevara a sentir que tiempo desaparece y lo único que existe es el espacio que llenamos estamos y estallamos y brillamos cuando hablamos las palabras flotan en el aire con melodías que no Solo nosotros escuchamos quiero hacer la canción que escribamos cuando estamos en silencio y solo nos miramos quiero creerme lo que sea que me ves, quiero hacerte sentir la mujer más especial del planeta quiero que seas lo especial que eres lo que creo que eres lo que quieres ser quiero que seas interminable.</p>
+            
+            <p>Estos <span class="destacado">4 meses</span> a tu lado han sido los más especiales de mi vida. Cada día contigo es un regalo que atesoro profundamente. Tu amor ha iluminado mi mundo de una manera que nunca creí posible.</p>
+            
+            <p>Recuerdo cada risa compartida, cada mirada cómplice, cada momento en silencio que habla más que mil palabras. Eres esa luz que guía mis días y esa paz que acuna mis noches.</p>
+            
+            <p>En estos <span class="destacado">4 meses</span>, has demostrado ser esa persona especial que llena cada espacio de mi vida con alegría, comprensión y un amor tan genuino que a veces me cuesta creer que es real.</p>
+            
+            <p>Espero con todo mi corazón que esta sea solo la primera de muchas celebraciones juntos. Que sigamos construyendo recuerdos, compartiendo sueños y amándonos cada día más.</p>
+        </div>
+        
+        <div class="firma">
+            Con todo mi amor,<br>
+            Para siempre tuyo
+        </div>
+        
+        <div class="fecha">4 meses juntos - ¡Te amo!</div>
+    </div>
+</body>
+</html>

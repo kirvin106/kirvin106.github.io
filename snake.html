@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serpiente 3D - Con Tienda de Skins</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .game-container {
+            position: relative;
+            width: 900px;
+            height: 650px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+        }
+        
+        #gameCanvas {
+            display: block;
+            background: #0a1f2e;
+        }
+        
+        .canvas-wrapper {
+            position: relative;
+            width: 600px;
+            height: 650px;
+        }
+        
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            pointer-events: none;
+        }
+        
+        .score-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            backdrop-filter: blur(5px);
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            transition: opacity 0.5s ease;
+        }
+        
+        .controls.hidden {
+            opacity: 0;
+        }
+        
+        .game-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px 50px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            max-width: 80%;
+            z-index: 10;
+        }
+        
+        .game-message h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+        }
+        
+        .game-message p {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #ff8a00, #ff2070);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .instructions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 250px;
+            font-size: 14px;
+            line-height: 1.5;
+            backdrop-filter: blur(5px);
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .shop-panel {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-y: auto;
+        }
+        
+        .shop-panel h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            font-size: 24px;
+        }
+        
+        .skin-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .skin-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .skin-item.locked {
+            opacity: 0.6;
+        }
+        
+        .skin-preview {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            margin-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        
+        .skin-info {
+            flex: 1;
+        }
+        
+        .skin-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .skin-price {
+            font-size: 14px;
+            color: #ffcc00;
+        }
+        
+        .skin-equip {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .skin-equip:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        
+        .current-skin {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+        }
+        
+        .coins-display {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .coins-display span {
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="600" height="650"></canvas>
+            
+            <div class="ui-overlay">
+                <div class="score-container">
+                    Puntuación: <span id="score">0</span>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3>Controles</h3>
+                <p>Usa las teclas de flecha para mover la serpiente</p>
+                <p>Come las frutas para crecer y ganar puntos</p>
+                <p>Evita chocar con los bordes y contigo misma</p>
+            </div>
+            
+            <div class="controls">
+                <p>Usa las teclas de flecha para mover la serpiente</p>
+            </div>
+            
+            <div id="startScreen" class="game-message">
+                <h2>Serpiente 3D</h2>
+                <p>¡Controla la serpiente y come todas las frutas!</p>
+                <p>Desbloquea skins con tus puntos</p>
+                <button id="startBtn" class="btn pulse">Comenzar Juego</button>
+            </div>
+            
+            <div id="gameOverScreen" class="game-message hidden">
+                <h2>¡Juego Terminado!</h2>
+                <p>Tu puntuación: <span id="finalScore">0</span></p>
+                <p>Monedas ganadas: <span id="coinsEarned">0</span></p>
+                <button id="restartBtn" class="btn">Jugar de Nuevo</button>
+            </div>
+        </div>
+        
+        <div class="shop-panel">
+            <h2>Tienda de Skins</h2>
+            <div class="coins-display">
+                Monedas: <span id="coins">0</span>
+            </div>
+            <div id="skinsContainer">
+                <!-- Las skins se generarán dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables del juego
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startScreen = document.getElementById('startScreen');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const startBtn = document.getElementById('startBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const scoreElement = document.getElementById('score');
+        const finalScoreElement = document.getElementById('finalScore');
+        const coinsElement = document.getElementById('coins');
+        const coinsEarnedElement = document.getElementById('coinsEarned');
+        const skinsContainer = document.getElementById('skinsContainer');
+        const controlsElement = document.querySelector('.controls');
+        
+        let score = 0;
+        let coins = 0;
+        let gameSpeed = 120;
+        let gameInterval;
+        let isGameOver = false;
+        let isGameStarted = false;
+        
+        // Configuración del tablero
+        const gridSize = 20;
+        const tileSize = 30;
+        const boardWidth = canvas.width;
+        const boardHeight = canvas.height;
+        
+        // Serpiente
+        let snake = [
+            {x: 10, y: 10, z: 0}
+        ];
+        let snakeDirection = {x: 1, y: 0, z: 0};
+        let nextDirection = {x: 1, y: 0, z: 0};
+        let currentSkin = 'default';
+        
+        // Comida
+        let food = {x: 0, y: 0, z: 0};
+        
+        // Skins disponibles
+        const skins = [
+            {
+                id: 'default',
+                name: 'Serpiente Clásica',
+                price: 0,
+                unlocked: true,
+                colorHead: '#00ff64',
+                colorBody: '#00aa40',
+                emoji: '🐍'
+            },
+            {
+                id: 'fire',
+                name: 'Serpiente de Fuego',
+                price: 100,
+                unlocked: false,
+                colorHead: '#ff3300',
+                colorBody: '#ff6600',
+                emoji: '🔥'
+            },
+            {
+                id: 'ice',
+                name: 'Serpiente de Hielo',
+                price: 150,
+                unlocked: false,
+                colorHead: '#00ffff',
+                colorBody: '#00aaff',
+                emoji: '❄️'
+            },
+            {
+                id: 'gold',
+                name: 'Serpiente Dorada',
+                price: 200,
+                unlocked: false,
+                colorHead: '#ffcc00',
+                colorBody: '#ffaa00',
+                emoji: '⭐'
+            },
+            {
+                id: 'rainbow',
+                name: 'Serpiente Arcoíris',
+                price: 300,
+                unlocked: false,
+                colorHead: '#ff00ff',
+                colorBody: '#00ffff',
+                emoji: '🌈'
+            }
+        ];
+        
+        // Inicializar el juego
+        function init() {
+            // Reiniciar variables
+            score = 0;
+            scoreElement.textContent = score;
+            gameSpeed = 120;
+            isGameOver = false;
+            
+            // Inicializar serpiente
+            snake = [
+                {x: 10, y: 10, z: 0}
+            ];
+            snakeDirection = {x: 1, y: 0, z: 0};
+            nextDirection = {x: 1, y: 0, z: 0};
+            
+            // Ocultar controles
+            controlsElement.classList.add('hidden');
+            
+            // Generar primera comida
+            generateFood();
+            
+            // Ocultar pantallas de inicio/fin
+            startScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            
+            // Iniciar bucle del juego
+            if (gameInterval) clearInterval(gameInterval);
+            gameInterval = setInterval(gameLoop, gameSpeed);
+            
+            isGameStarted = true;
+            
+            // Actualizar tienda
+            updateShop();
+        }
+        
+        // Bucle principal del juego
+        function gameLoop() {
+            if (isGameOver) return;
+            
+            // Actualizar dirección
+            snakeDirection = {...nextDirection};
+            
+            // Mover la serpiente
+            moveSnake();
+            
+            // Comprobar colisiones
+            if (checkCollisions()) {
+                gameOver();
+                return;
+            }
+            
+            // Comprobar si come la comida
+            if (checkFoodCollision()) {
+                // Aumentar puntuación
+                score += 10;
+                scoreElement.textContent = score;
+                
+                // Añadir monedas
+                coins += 5;
+                coinsElement.textContent = coins;
+                
+                // Añadir segmento a la serpiente
+                growSnake();
+                
+                // Generar nueva comida
+                generateFood();
+                
+                // Aumentar velocidad
+                if (gameSpeed > 50 && score % 50 === 0) {
+                    gameSpeed -= 5;
+                    clearInterval(gameInterval);
+                    gameInterval = setInterval(gameLoop, gameSpeed);
+                }
+                
+                // Actualizar tienda (por si se desbloquea alguna skin)
+                updateShop();
+            }
+            
+            // Dibujar el juego
+            draw();
+        }
+        
+        // Mover la serpiente
+        function moveSnake() {
+            // Crear nueva cabeza
+            const head = {...snake[0]};
+            head.x += snakeDirection.x;
+            head.y += snakeDirection.y;
+            head.z += snakeDirection.z;
+            
+            // Añadir nueva cabeza al principio
+            snake.unshift(head);
+            
+            // Eliminar la cola (a menos que haya comido)
+            snake.pop();
+        }
+        
+        // Hacer crecer la serpiente
+        function growSnake() {
+            // Añadir un nuevo segmento al final
+            const tail = {...snake[snake.length - 1]};
+            snake.push(tail);
+        }
+        
+        // Comprobar colisiones
+        function checkCollisions() {
+            const head = snake[0];
+            
+            // Colisión con los bordes
+            if (head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize) {
+                return true;
+            }
+            
+            // Colisión consigo misma
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        
+        // Comprobar colisión con la comida
+        function checkFoodCollision() {
+            const head = snake[0];
+            return head.x === food.x && head.y === food.y;
+        }
+        
+        // Generar comida en posición aleatoria
+        function generateFood() {
+            let newFoodPosition;
+            let isOnSnake;
+            
+            do {
+                isOnSnake = false;
+                newFoodPosition = {
+                    x: Math.floor(Math.random() * gridSize),
+                    y: Math.floor(Math.random() * gridSize),
+                    z: 0
+                };
+                
+                // Verificar que no esté en la serpiente
+                for (let segment of snake) {
+                    if (segment.x === newFoodPosition.x && segment.y === newFoodPosition.y) {
+                        isOnSnake = true;
+                        break;
+                    }
+                }
+            } while (isOnSnake);
+            
+            food = newFoodPosition;
+        }
+        
+        // Obtener skin actual
+        function getCurrentSkin() {
+            return skins.find(skin => skin.id === currentSkin);
+        }
+        
+        // Dibujar el juego
+        function draw() {
+            // Limpiar el canvas
+            ctx.fillStyle = '#0a1f2e';
+            ctx.fillRect(0, 0, boardWidth, boardHeight);
+            
+            // Dibujar rejilla
+            drawGrid();
+            
+            // Dibujar comida
+            drawFood();
+            
+            // Dibujar serpiente
+            drawSnake();
+            
+            // Dibujar efectos especiales
+            drawEffects();
+        }
+        
+        // Dibujar rejilla del tablero
+        function drawGrid() {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            
+            for (let x = 0; x <= gridSize; x++) {
+                ctx.beginPath();
+                ctx.moveTo(x * tileSize, 0);
+                ctx.lineTo(x * tileSize, boardHeight);
+                ctx.stroke();
+            }
+            
+            for (let y = 0; y <= gridSize; y++) {
+                ctx.beginPath();
+                ctx.moveTo(0, y * tileSize);
+                ctx.lineTo(boardWidth, y * tileSize);
+                ctx.stroke();
+            }
+        }
+        
+        // Dibujar comida
+        function drawFood() {
+            const x = food.x * tileSize + tileSize / 2;
+            const y = food.y * tileSize + tileSize / 2;
+            const radius = tileSize / 2 - 2;
+            
+            // Efecto de brillo
+            const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+            gradient.addColorStop(0, '#ffcc00');
+            gradient.addColorStop(1, '#ff6600');
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Destello
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.beginPath();
+            ctx.arc(x - radius/3, y - radius/3, radius/4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Sombra 3D
+            ctx.shadowColor = 'rgba(255, 102, 0, 0.5)';
+            ctx.shadowBlur = 15;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+        
+        // Dibujar serpiente
+        function drawSnake() {
+            const skin = getCurrentSkin();
+            
+            // Dibujar cada segmento de la serpiente
+            for (let i = 0; i < snake.length; i++) {
+                const segment = snake[i];
+                const x = segment.x * tileSize;
+                const y = segment.y * tileSize;
+                
+                // Color según la skin
+                const color = i === 0 ? skin.colorHead : skin.colorBody;
+                
+                // Efecto 3D con gradiente
+                const gradient = ctx.createLinearGradient(x, y, x + tileSize, y + tileSize);
+                gradient.addColorStop(0, color);
+                gradient.addColorStop(1, i === 0 ? 
+                    adjustColor(skin.colorHead, -30) : 
+                    adjustColor(skin.colorBody, -30));
+                
+                ctx.fillStyle = gradient;
+                
+                // Bordes redondeados para efecto 3D
+                ctx.beginPath();
+                ctx.roundRect(x + 2, y + 2, tileSize - 4, tileSize - 4, 5);
+                ctx.fill();
+                
+                // Efecto de brillo en la cabeza
+                if (i === 0) {
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                    ctx.beginPath();
+                    ctx.arc(x + tileSize - 8, y + 8, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Ojos
+                    ctx.fillStyle = 'black';
+                    ctx.beginPath();
+                    
+                    // Ojo derecho
+                    if (snakeDirection.x === 1) {
+                        ctx.arc(x + tileSize - 6, y + 10, 2, 0, Math.PI * 2);
+                    } else if (snakeDirection.x === -1) {
+                        ctx.arc(x + 6, y + 10, 2, 0, Math.PI * 2);
+                    } else if (snakeDirection.y === 1) {
+                        ctx.arc(x + 10, y + tileSize - 6, 2, 0, Math.PI * 2);
+                    } else {
+                        ctx.arc(x + 10, y + 6, 2, 0, Math.PI * 2);
+                    }
+                    
+                    // Ojo izquierdo
+                    if (snakeDirection.x === 1) {
+                        ctx.arc(x + tileSize - 6, y + tileSize - 10, 2, 0, Math.PI * 2);
+                    } else if (snakeDirection.x === -1) {
+                        ctx.arc(x + 6, y + tileSize - 10, 2, 0, Math.PI * 2);
+                    } else if (snakeDirection.y === 1) {
+                        ctx.arc(x + tileSize - 10, y + tileSize - 6, 2, 0, Math.PI * 2);
+                    } else {
+                        ctx.arc(x + tileSize - 10, y + 6, 2, 0, Math.PI * 2);
+                    }
+                    
+                    ctx.fill();
+                }
+                
+                // Sombra para efecto 3D
+                ctx.shadowColor = adjustColor(color, -50);
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+        
+        // Ajustar color (claro/oscuro)
+        function adjustColor(color, amount) {
+            // Convertir hex a RGB
+            let r = parseInt(color.substr(1, 2), 16);
+            let g = parseInt(color.substr(3, 2), 16);
+            let b = parseInt(color.substr(5, 2), 16);
+            
+            // Ajustar valores
+            r = Math.max(0, Math.min(255, r + amount));
+            g = Math.max(0, Math.min(255, g + amount));
+            b = Math.max(0, Math.min(255, b + amount));
+            
+            // Convertir de nuevo a hex
+            return '#' + r.toString(16).padStart(2, '0') + 
+                         g.toString(16).padStart(2, '0') + 
+                         b.toString(16).padStart(2, '0');
+        }
+        
+        // Dibujar efectos especiales
+        function drawEffects() {
+            // Efecto de partículas alrededor de la comida
+            const time = Date.now() * 0.002;
+            const x = food.x * tileSize + tileSize / 2;
+            const y = food.y * tileSize + tileSize / 2;
+            
+            for (let i = 0; i < 5; i++) {
+                const angle = time + (i * Math.PI * 0.4);
+                const radius = tileSize / 2 + Math.sin(time * 2 + i) * 5;
+                const particleX = x + Math.cos(angle) * radius;
+                const particleY = y + Math.sin(angle) * radius;
+                
+                ctx.fillStyle = `rgba(255, ${200 + Math.sin(time + i) * 55}, 0, 0.7)`;
+                ctx.beginPath();
+                ctx.arc(particleX, particleY, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        // Actualizar la tienda de skins
+        function updateShop() {
+            skinsContainer.innerHTML = '';
+            
+            skins.forEach(skin => {
+                // Verificar si la skin está desbloqueada (por puntos)
+                if (!skin.unlocked && coins >= skin.price) {
+                    skin.unlocked = true;
+                }
+                
+                const skinElement = document.createElement('div');
+                skinElement.className = `skin-item ${skin.unlocked ? '' : 'locked'} ${skin.id === currentSkin ? 'current-skin' : ''}`;
+                
+                skinElement.innerHTML = `
+                    <div class="skin-preview" style="background: ${skin.colorHead}">
+                        ${skin.emoji}
+                    </div>
+                    <div class="skin-info">
+                        <div class="skin-name">${skin.name}</div>
+                        <div class="skin-price">${skin.unlocked ? 'Desbloqueada' : `Precio: ${skin.price} monedas`}</div>
+                    </div>
+                    <button class="skin-equip" ${skin.unlocked && skin.id !== currentSkin ? '' : 'disabled'}>
+                        ${skin.id === currentSkin ? 'Equipada' : 'Equipar'}
+                    </button>
+                `;
+                
+                // Añadir evento para equipar skin
+                const equipButton = skinElement.querySelector('.skin-equip');
+                if (equipButton) {
+                    equipButton.addEventListener('click', () => {
+                        currentSkin = skin.id;
+                        updateShop();
+                    });
+                }
+                
+                skinsContainer.appendChild(skinElement);
+            });
+        }
+        
+        // Finalizar juego
+        function gameOver() {
+            isGameOver = true;
+            clearInterval(gameInterval);
+            
+            // Mostrar controles nuevamente
+            controlsElement.classList.remove('hidden');
+            
+            // Calcular monedas ganadas en esta partida
+            const earnedCoins = Math.floor(score / 2);
+            coins += earnedCoins;
+            
+            // Mostrar pantalla de fin de juego
+            finalScoreElement.textContent = score;
+            coinsEarnedElement.textContent = earnedCoins;
+            coinsElement.textContent = coins;
+            gameOverScreen.classList.remove('hidden');
+            
+            // Actualizar tienda
+            updateShop();
+        }
+        
+        // Manejar eventos de teclado
+        document.addEventListener('keydown', (e) => {
+            if (!isGameStarted) return;
+            
+            switch(e.key) {
+                case 'ArrowUp':
+                    if (snakeDirection.y !== 1) {
+                        nextDirection = {x: 0, y: -1, z: 0};
+                    }
+                    break;
+                case 'ArrowDown':
+                    if (snakeDirection.y !== -1) {
+                        nextDirection = {x: 0, y: 1, z: 0};
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if (snakeDirection.x !== 1) {
+                        nextDirection = {x: -1, y: 0, z: 0};
+                    }
+                    break;
+                case 'ArrowRight':
+                    if (snakeDirection.x !== -1) {
+                        nextDirection = {x: 1, y: 0, z: 0};
+                    }
+                    break;
+            }
+        });
+        
+        // Botones de inicio y reinicio
+        startBtn.addEventListener('click', () => {
+            init();
+            isGameStarted = true;
+        });
+        
+        restartBtn.addEventListener('click', () => {
+            init();
+        });
+        
+        // Inicializar tienda
+        updateShop();
+        
+        // Dibujar pantalla inicial
+        draw();
+    </script>
+</body>
+</html>
