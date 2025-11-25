@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irvin Escamilla</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5ecd7;
+            color: #5c4b37;
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><rect fill="%235c4b37" width="100" height="100"/></svg>');
+        }
+        
+        h1 {
+            color: #8b4513;
+            border-bottom: 2px dashed #8b4513;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            font-size: 1.4em;
+        }
+        
+        .ejercicio {
+            background-color: #f9f3e9;
+            border: 1px solid #d9c7a7;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 3px 3px 5px rgba(92, 75, 55, 0.1);
+        }
+        
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input[type="number"], input[type="text"] {
+            padding: 6px;
+            border: 1px solid #b8a27a;
+            border-radius: 3px;
+            width: 180px;
+            background-color: #fffdf5;
+            font-family: 'Courier New', monospace;
+        }
+        
+        button {
+            background-color: #8b4513;
+            color: #f5ecd7;
+            border: 1px solid #5c4b37;
+            padding: 8px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            font-family: 'Courier New', monospace;
+        }
+        
+        button:hover {
+            background-color: #a0522d;
+            transform: translateY(-1px);
+        }
+        
+        .resultado {
+            font-weight: bold;
+            color: #2e8b57;
+            background-color: #f0f8f0;
+            padding: 2px 5px;
+            border-radius: 2px;
+        }
+        
+        .titulo-principal {
+            text-align: center;
+            color: #8b4513;
+            margin-bottom: 30px;
+            border: 2px solid #8b4513;
+            padding: 15px;
+            background-color: #f9f3e9;
+            box-shadow: 5px 5px 0px rgba(139, 69, 19, 0.2);
+            font-size: 1.8em;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .nota {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #8b7d6b;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="titulo-principal">Irvin Alfredo Escamilla Castillo</h1>
+    
+    <div class="ejercicio">
+        <h1>1. Comparador de Números</h1>
+        <label for="primerNumero">Primer número:</label>
+        <input type="number" id="primerNumero" placeholder="Ingrese un número"><br><br>
+        
+        <label for="segundoNumero">Segundo número:</label>
+        <input type="number" id="segundoNumero" placeholder="Ingrese un número"><br><br>
+        
+        <button onclick="compararNumeros()">Comparar números</button><br><br>
+        
+        <label for="resultadoComparacion">Resultado:</label>
+        <input type="text" id="resultadoComparacion" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>2. Ordenador de Tres Números</h1>
+        <label for="primerValor">Primer número:</label>
+        <input type="number" id="primerValor" placeholder="Ingrese un número"><br><br>
+        
+        <label for="segundoValor">Segundo número:</label>
+        <input type="number" id="segundoValor" placeholder="Ingrese un número"><br><br>
+        
+        <label for="tercerValor">Tercer número:</label>
+        <input type="number" id="tercerValor" placeholder="Ingrese un número"><br><br>
+        
+        <button onclick="ordenarNumeros()">Ordenar números</button><br><br>
+        
+        <label for="resultadoOrden">Resultado:</label>
+        <input type="text" id="resultadoOrden" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>3. Verificador de Múltiplo de 5</h1>
+        <label for="numeroVerificar">Número a verificar:</label>
+        <input type="number" id="numeroVerificar" placeholder="Ingrese un número"><br><br>
+        
+        <button onclick="verificarMultiplo()">Verificar</button><br><br>
+        
+        <label for="resultadoMultiplo">Resultado:</label>
+        <input type="text" id="resultadoMultiplo" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>4. Verificador de Pares</h1>
+        <label for="primerPar">Primer número:</label>
+        <input type="number" id="primerPar" placeholder="Ingrese un número"><br><br>
+        
+        <label for="segundoPar">Segundo número:</label>
+        <input type="number" id="segundoPar" placeholder="Ingrese un número"><br><br>
+        
+        <button onclick="verificarPares()">Verificar paridad</button><br><br>
+        
+        <label for="resultadoPar">Resultado:</label>
+        <input type="text" id="resultadoPar" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>5. Calculadora de Tiempo (+1 segundo)</h1>
+        <label for="horas">Horas:</label>
+        <input type="number" id="horas" placeholder="0-23"><br>
+        <div class="nota">Valor entre 0 y 23</div><br>
+        
+        <label for="minutos">Minutos:</label>
+        <input type="number" id="minutos" placeholder="0-59"><br>
+        <div class="nota">Valor entre 0 y 59</div><br>
+        
+        <label for="segundos">Segundos:</label>
+        <input type="number" id="segundos" placeholder="0-59"><br>
+        <div class="nota">Valor entre 0 y 59</div><br>
+        
+        <button onclick="calcularSiguienteSegundo()">Calcular siguiente segundo</button><br><br>
+        
+        <label for="resultadoTiempo">Nueva hora:</label>
+        <input type="text" id="resultadoTiempo" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>6. Identificador de Signo Numérico</h1>
+        <label for="numeroSigno">Número a evaluar:</label>
+        <input type="number" id="numeroSigno" placeholder="Ingrese un número"><br><br>
+        
+        <button onclick="identificarSigno()">Identificar signo</button><br><br>
+        
+        <label for="resultadoSigno">Resultado:</label>
+        <input type="text" id="resultadoSigno" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>7. Clasificador de Par/Impar</h1>
+        <label for="numeroParImpar">Número a clasificar:</label>
+        <input type="number" id="numeroParImpar" placeholder="Ingrese un número"><br><br>
+        
+        <button onclick="clasificarParidad()">Clasificar</button><br><br>
+        
+        <label for="resultadoClasificacion">Resultado:</label>
+        <input type="text" id="resultadoClasificacion" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>8. Buscador de Extremos (10 números)</h1>
+        <div class="grid-container">
+            <div>
+                <label>Número 1:</label>
+                <input type="number" id="valor1"><br><br>
+                <label>Número 2:</label>
+                <input type="number" id="valor2"><br><br>
+                <label>Número 3:</label>
+                <input type="number" id="valor3"><br><br>
+                <label>Número 4:</label>
+                <input type="number" id="valor4"><br><br>
+                <label>Número 5:</label>
+                <input type="number" id="valor5"><br><br>
+            </div>
+            <div>
+                <label>Número 6:</label>
+                <input type="number" id="valor6"><br><br>
+                <label>Número 7:</label>
+                <input type="number" id="valor7"><br><br>
+                <label>Número 8:</label>
+                <input type="number" id="valor8"><br><br>
+                <label>Número 9:</label>
+                <input type="number" id="valor9"><br><br>
+                <label>Número 10:</label>
+                <input type="number" id="valor10"><br><br>
+            </div>
+        </div>
+        
+        <button onclick="encontrarExtremos()">Encontrar mayor y menor</button><br><br>
+        
+        <label for="resultadoExtremos">Resultado:</label>
+        <input type="text" id="resultadoExtremos" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>9. Calculadora de Descuentos</h1>
+        <label for="montoCompra">Monto de compra:</label>
+        <input type="number" id="montoCompra" placeholder="Ingrese el monto"><br><br>
+        
+        <button onclick="calcularDescuento()">Calcular descuento</button><br><br>
+        
+        <label for="resultadoDescuento">Monto final:</label>
+        <input type="text" id="resultadoDescuento" class="resultado" readonly>
+    </div>
+    
+    <div class="ejercicio">
+        <h1>10. Identificador de Vocales</h1>
+        <label for="caracter">Ingrese un carácter:</label>
+        <input type="text" id="caracter" placeholder="Una letra" maxlength="1"><br>
+        <div class="nota">Solo se evaluará el primer carácter</div><br>
+        
+        <button onclick="verificarVocal()">Verificar si es vocal</button><br><br>
+        
+        <label for="resultadoVocal">Resultado:</label>
+        <input type="text" id="resultadoVocal" class="resultado" readonly>
+    </div>
+
+    <script>
+        function compararNumeros() {
+            let primerNumero, segundoNumero, resultado;
+            
+            primerNumero = parseFloat(document.getElementById("primerNumero").value);
+            segundoNumero = parseFloat(document.getElementById("segundoNumero").value);
+            
+            if (primerNumero > segundoNumero) {
+                resultado = "El número mayor es " + primerNumero;
+            } else if (segundoNumero > primerNumero) {
+                resultado = "El número mayor es " + segundoNumero;
+            } else {
+                resultado = "Los números son iguales";
+            }
+            
+            document.getElementById("resultadoComparacion").value = resultado;
+        }
+        
+        function ordenarNumeros() {
+            let primerValor, segundoValor, tercerValor;
+            primerValor = parseFloat(document.getElementById("primerValor").value);
+            segundoValor = parseFloat(document.getElementById("segundoValor").value);
+            tercerValor = parseFloat(document.getElementById("tercerValor").value);
+            
+            let menor, medio, mayor;
+            
+            if (primerValor <= segundoValor && primerValor <= tercerValor) {
+                menor = primerValor;
+                
+                if (segundoValor <= tercerValor) {
+                    medio = segundoValor;
+                    mayor = tercerValor;
+                } else {
+                    medio = tercerValor;
+                    mayor = segundoValor;
+                }
+            } else if (segundoValor <= primerValor && segundoValor <= tercerValor) {
+                menor = segundoValor;
+                if (primerValor <= tercerValor) {
+                    medio = primerValor;
+                    mayor = tercerValor;
+                } else {
+                    medio = tercerValor;
+                    mayor = primerValor;
+                }
+            } else {
+                menor = tercerValor;
+                if (primerValor <= segundoValor) {
+                    medio = primerValor;
+                    mayor = segundoValor;
+                } else {
+                    medio = segundoValor;
+                    mayor = primerValor;
+                }
+            }
+            
+            document.getElementById("resultadoOrden").value = menor + ", " + medio + ", " + mayor;
+        }
+        
+        function verificarMultiplo() {
+            let numeroVerificar, resultado;
+            numeroVerificar = parseFloat(document.getElementById("numeroVerificar").value);
+            
+            if (numeroVerificar % 5 == 0) {
+                resultado = "Sí es múltiplo de 5";
+            } else {
+                resultado = "No es múltiplo de 5";
+            }
+            
+            document.getElementById("resultadoMultiplo").value = resultado;
+        }
+        
+        function verificarPares() {
+            let primerPar, segundoPar, resultado;
+            
+            primerPar = parseFloat(document.getElementById("primerPar").value);
+            segundoPar = parseFloat(document.getElementById("segundoPar").value);
+            
+            if (primerPar % 2 == 0 && segundoPar % 2 == 0) {
+                resultado = "Los dos son pares";
+            } else {
+                resultado = "No son pares los dos";
+            }
+            
+            document.getElementById("resultadoPar").value = resultado;
+        }
+        
+        function calcularSiguienteSegundo() {
+            let horas, minutos, segundos;
+            
+            horas = parseFloat(document.getElementById("horas").value);
+            minutos = parseFloat(document.getElementById("minutos").value);
+            segundos = parseFloat(document.getElementById("segundos").value);
+            
+            segundos = segundos + 1;
+            
+            if (segundos >= 60) {
+                segundos = 0;
+                minutos = minutos + 1;
+            }
+            
+            if (minutos >= 60) {
+                minutos = 0;
+                horas = horas + 1;
+            }
+            
+            if (horas >= 24) {
+                horas = 0;
+            }
+            
+            document.getElementById("resultadoTiempo").value = horas + " : " + minutos + " : " + segundos;
+        }
+        
+        function identificarSigno() {
+            let numeroSigno, resultado;
+            
+            numeroSigno = parseFloat(document.getElementById("numeroSigno").value);
+            
+            if (numeroSigno > 0) {
+                resultado = "Es positivo";
+            } else if (numeroSigno < 0) {
+                resultado = "Es negativo";
+            } else {
+                resultado = "Es 0";
+            }
+            
+            document.getElementById("resultadoSigno").value = resultado;
+        }
+        
+        function clasificarParidad() {
+            let numeroParImpar, resultado;
+            
+            numeroParImpar = parseFloat(document.getElementById("numeroParImpar").value);
+            
+            if (numeroParImpar == 0) {
+                resultado = "Es 0";
+            } else if (numeroParImpar % 2 == 0) {
+                resultado = "Es par";
+            } else {
+                resultado = "Es impar";
+            }
+            
+            document.getElementById("resultadoClasificacion").value = resultado;
+        }
+        
+        function encontrarExtremos() {
+            let valor1, valor2, valor3, valor4, valor5, valor6, valor7, valor8, valor9, valor10, mayor, menor;
+            
+            valor1 = parseFloat(document.getElementById("valor1").value);
+            valor2 = parseFloat(document.getElementById("valor2").value);
+            valor3 = parseFloat(document.getElementById("valor3").value);
+            valor4 = parseFloat(document.getElementById("valor4").value);
+            valor5 = parseFloat(document.getElementById("valor5").value);
+            valor6 = parseFloat(document.getElementById("valor6").value);
+            valor7 = parseFloat(document.getElementById("valor7").value);
+            valor8 = parseFloat(document.getElementById("valor8").value);
+            valor9 = parseFloat(document.getElementById("valor9").value);
+            valor10 = parseFloat(document.getElementById("valor10").value);
+            
+            mayor = valor1;
+            menor = valor1;
+            
+            if (valor2 > mayor) mayor = valor2;
+            if (valor3 > mayor) mayor = valor3;
+            if (valor4 > mayor) mayor = valor4;
+            if (valor5 > mayor) mayor = valor5;
+            if (valor6 > mayor) mayor = valor6;
+            if (valor7 > mayor) mayor = valor7;
+            if (valor8 > mayor) mayor = valor8;
+            if (valor9 > mayor) mayor = valor9;
+            if (valor10 > mayor) mayor = valor10;
+            
+            if (valor2 < menor) menor = valor2;
+            if (valor3 < menor) menor = valor3;
+            if (valor4 < menor) menor = valor4;
+            if (valor5 < menor) menor = valor5;
+            if (valor6 < menor) menor = valor6;
+            if (valor7 < menor) menor = valor7;
+            if (valor8 < menor) menor = valor8;
+            if (valor9 < menor) menor = valor9;
+            if (valor10 < menor) menor = valor10;
+            
+            document.getElementById("resultadoExtremos").value = "Mayor: " + mayor + " | Menor: " + menor;
+        }
+        
+        function calcularDescuento() {
+            let montoCompra, resultado, descuento;
+            
+            montoCompra = parseFloat(document.getElementById("montoCompra").value);
+            
+            if (montoCompra >= 10000) {
+                descuento = montoCompra * 0.15;
+            } else {
+                descuento = montoCompra * 0.10;
+            }
+            
+            resultado = montoCompra - descuento;
+            
+            document.getElementById("resultadoDescuento").value = resultado;
+        }
+        
+        function verificarVocal() {
+            let caracter, resultado;
+            
+            caracter = document.getElementById("caracter").value;
+            
+            if (caracter == "a" || caracter == "e" || caracter == "i" || caracter == "o" || caracter == "u" ||
+                caracter == "A" || caracter == "E" || caracter == "I" || caracter == "O" || caracter == "U") {
+                resultado = "Es una vocal";
+            } else {
+                resultado = "No es una vocal";
+            }
+            
+            document.getElementById("resultadoVocal").value = resultado;
+        }
+    </script>
+</body>
+</html>
