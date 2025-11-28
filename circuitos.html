@@ -136,6 +136,36 @@
             margin: 15px 0;
         }
         
+        /* Estilos para imagen principal */
+        .main-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        
+        .image-caption {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
         /* Barra lateral */
         aside {
             background-color: white;
@@ -179,6 +209,16 @@
             h1 {
                 font-size: 2.2rem;
             }
+            
+            .main-image {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-image {
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -204,8 +244,14 @@
         
         <main>
             <section class="content">
+                <!-- SECCIÓN RESISTORES -->
                 <div id="resistor-content" class="content-section">
                     <h2>Resistores</h2>
+                    
+                    <div class="main-image">
+                        <img src="imagenes/resistores.jpg" alt="Tipos de resistores">
+                    </div>
+                    <p class="image-caption">Tipos de resistores: Fijos, variables, termistores y fotorresistencias</p>
                     
                     <h3>¿Qué es un resistor?</h3>
                     <p>Un resistor es un componente electrónico diseñado para oponerse al flujo de corriente eléctrica. Su función principal es limitar la corriente en un circuito y crear caídas de voltaje.</p>
@@ -238,8 +284,14 @@
                     </div>
                 </div>
                 
+                <!-- SECCIÓN CAPACITORES -->
                 <div id="capacitor-content" class="content-section" style="display: none;">
                     <h2>Capacitores</h2>
+                    
+                    <div class="main-image">
+                        <img src="imagenes/capacitores.jpg" alt="Tipos de capacitores">
+                    </div>
+                    <p class="image-caption">Tipos de capacitores: Cerámicos, electrolíticos, tántalo, de película y variables</p>
                     
                     <h3>¿Qué es un capacitor?</h3>
                     <p>Un capacitor es un componente electrónico que almacena energía en forma de campo eléctrico. Está formado por dos placas conductoras separadas por un material aislante (dieléctrico).</p>
@@ -269,8 +321,14 @@
                     </div>
                 </div>
                 
+                <!-- SECCIÓN INDUCTORES -->
                 <div id="inductor-content" class="content-section" style="display: none;">
                     <h2>Inductores</h2>
+                    
+                    <div class="main-image">
+                        <img src="imagenes/conductores.jpg" alt="Tipos de inductores">
+                    </div>
+                    <p class="image-caption">Tipos de inductores: Núcleo de aire, ferromagnético, toroidal y ajustables</p>
                     
                     <h3>¿Qué es un inductor?</h3>
                     <p>Un inductor es un componente electrónico que almacena energía en forma de campo magnético. Generalmente consiste en un alambre enrollado en forma de bobina.</p>
@@ -299,8 +357,14 @@
                     </div>
                 </div>
                 
+                <!-- SECCIÓN DIODOS -->
                 <div id="diodo-content" class="content-section" style="display: none;">
                     <h2>Diodos</h2>
+                    
+                    <div class="main-image">
+                        <img src="imagenes/diodos.jpg" alt="Tipos de diodos">
+                    </div>
+                    <p class="image-caption">Tipos de diodos: Rectificador, Zener, LED, Schottky y Varicap</p>
                     
                     <h3>¿Qué es un diodo?</h3>
                     <p>Un diodo es un componente semiconductor que permite el flujo de corriente en una sola dirección. Actúa como una válvula unidireccional para la corriente eléctrica.</p>
@@ -324,8 +388,14 @@
                     </div>
                 </div>
                 
+                <!-- SECCIÓN TRANSISTORES -->
                 <div id="transistor-content" class="content-section" style="display: none;">
                     <h2>Transistores</h2>
+                    
+                    <div class="main-image">
+                        <img src="imagenes/transistores.jpg" alt="Tipos de transistores">
+                    </div>
+                    <p class="image-caption">Tipos de transistores: BJT, FET, MOSFET e IGBT</p>
                     
                     <h3>¿Qué es un transistor?</h3>
                     <p>Un transistor es un dispositivo semiconductor que puede amplificar o conmutar señales electrónicas. Es el componente fundamental de la electrónica moderna.</p>
@@ -354,6 +424,7 @@
                     </div>
                 </div>
                 
+                <!-- SECCIÓN BIBLIOGRAFÍA -->
                 <div id="bibliography-content" class="content-section" style="display: none;">
                     <h2>Bibliografías</h2>
                     
@@ -385,6 +456,7 @@
                     <li>Tipos principales</li>
                     <li>Principios de funcionamiento</li>
                     <li>Ejemplos prácticos</li>
+                    <li>Imágenes ilustrativas</li>
                 </ul>
                 <p>Utiliza el menú de navegación para explorar los diferentes elementos de circuito.</p>
                 
@@ -396,7 +468,7 @@
         </main>
         
         <footer>
-            <p> Irvin Alfredo Escamilla Castillo-1C-19/11/2025</p>
+            <p>Irvin Alfredo Escamilla Castillo - 1C - 19/11/2025</p>
         </footer>
     </div>
     
